@@ -1,24 +1,16 @@
 /* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
+  /* Light theme colors based on requirements */
   --bg-primary: #ffffff;
   --bg-secondary: #f8f9fa;
   --text-primary: #282c34;
-  --text-secondary: #61dafb;
+  --primary-color: #1976D2;
+  --secondary-color: #9E9E9E;
+  --accent-color: #FFC107;
   --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
-}
-
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+  --cell-bg: #ffffff;
+  --cell-border: #ccc;
+  --cell-initial-bg: #f0f0f0;
 }
 
 .App {
@@ -26,79 +18,102 @@
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+}
+
+.game-title {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.sudoku-board {
+  background: var(--cell-bg);
+  border: 2px solid var(--primary-color);
+  display: inline-block;
+  padding: 2px;
+  margin-bottom: 20px;
+}
+
+.sudoku-row {
+  display: flex;
+}
+
+.sudoku-cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--cell-border);
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 0;
+  margin: 0;
+  background: var(--cell-bg);
+}
+
+.sudoku-cell::-webkit-inner-spin-button,
+.sudoku-cell::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.sudoku-cell.initial {
+  background: var(--cell-initial-bg);
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.sudoku-cell.border-bottom {
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.sudoku-cell.border-right {
+  border-right: 2px solid var(--primary-color);
+}
+
+.controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+.control-button {
+  background-color: var(--primary-color);
+  color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.control-button:hover {
+  background-color: #1565C0;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.hint-message {
+  margin-top: 20px;
+  color: var(--accent-color);
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Responsive design */
+@media (max-width: 480px) {
+  .sudoku-cell {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+  .controls {
+    flex-direction: column;
+  }
+
+  .control-button {
+    width: 100%;
   }
 }
